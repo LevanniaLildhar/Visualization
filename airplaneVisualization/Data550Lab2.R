@@ -56,7 +56,7 @@ cuckoosLBRatio
 barplot(cuckoosLBRatio, main="Cuckoo Egg Length-Breadth Ratio", legend = c("short","moderately short", "moderately long", "long"),
         ylim = c(0, 25), ylab = "Number of Eggs Classified", xlab = "Host Nest Species", beside=TRUE)
 
-# ** See CuckoosLBRBarchart.png for screenshot of above chart **
+# ** See Cuckoos/CuckoosLBRBarchart.png for screenshot of above chart **
 
 # From the above chart, we can conclude that no eggs laid in wren nests are classified 
 # as long, no eggs laid in hedge sparrow nests are classified as short, noticeably more eggs 
@@ -70,7 +70,7 @@ barplot(cuckoosLBRatio, main="Cuckoo Egg Length-Breadth Ratio", legend = c("shor
 # If you use beside=FALSE in the call to barplot, you get a stacked barchart, which is
 # harder to see the differences between the classifications of similar amounts.
 
-# ** SEe CuckoosLBRBarStack.png for screenshot of the above chart. **
+# ** SEe Cuckoos/CuckoosLBRBarStack.png for screenshot of the above chart. **
 
 #------------------------------------------
 # Question 3: Shiny App of Airports Data
@@ -179,7 +179,7 @@ head(FlightBehaviour)
 
  
 Carriers <- unique(FlightBehaviour$Carrier)
-par(mfrow=c(4,5), mar=c(.1,.1,.1,.1))
+par(mfrow=c(4,5), mar=c(0.1,0.1,0.1,0.1), oma=c(0.5,0.5,1.5,0.5))
 
 #Plot of original code provided (Arrival Delay vs Diverted):
 for (i in 1:20) {
@@ -191,7 +191,7 @@ for (i in 1:20) {
   with(subset(FlightBehaviour, Carrier == Carriers[i] & propDiverted> .001),
        lines(lowess(log(propDiverted), propArrDelay), col=2))
 }
-
+mtext("Is There A Relationship Between Arrival Delays and Diverted Flights?", outer=TRUE,  cex=1, line=0)
 
 #ArrivalDelay vs Cancelled:
 for (i in 1:20) {
@@ -203,6 +203,7 @@ for (i in 1:20) {
   with(subset(FlightBehaviour, Carrier == Carriers[i]),
        lines(lowess(propCancelled, propArrDelay), col=2))
 }
+mtext("Is There A Relationship Between Arrival Delays and Cancelled Flights?", outer=TRUE,  cex=1, line=0)
 
 #Cancelled vs Diverted:
 for (i in 1:20) {
@@ -214,3 +215,4 @@ for (i in 1:20) {
   with(subset(FlightBehaviour, Carrier == Carriers[i] & propDiverted > .001),
        lines(lowess(log(propDiverted), propCancelled), col=2))
 }
+mtext("Is There A Relationship Between Cancelled and Diverted Flights?", outer=TRUE,  cex=1, line=0)
